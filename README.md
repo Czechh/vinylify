@@ -1,6 +1,6 @@
 # Vinylify
 
-Take a Spotify playlist and turn it into a Discogs list.
+Take a Spotify playlist and turn it into a Discogs collection folder.
 
 ## Requirements
 - Get Discogs personal token https://www.discogs.com/settings/developers
