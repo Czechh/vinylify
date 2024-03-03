@@ -1,4 +1,5 @@
 pub mod discogs;
+pub mod youtube;
 
 use anyhow::Result;
 use async_recursion::async_recursion;
@@ -129,7 +130,7 @@ async fn import_selection(
                 format!("{}{} - {}\n", acc, artist, track)
             })
     );
-    let post_selection_options = vec!["Import", "Go back to Playlist list"];
+    let post_selection_options = vec!["Import to Discogs", "YT", "Go back to Playlist list"];
     let post_selection_action = Select::with_theme(&theme)
         .with_prompt(track_prompt)
         .report(false)
@@ -147,6 +148,10 @@ async fn import_selection(
     if post_selection_index == 0 {
         println!("Importing tracks");
         let _result = discogs::import_tracks(track_list, &playlist_name).await;
+        Ok(())
+    } else if post_selection_index == 1 {
+        println!("Going to download tracks from YT");
+        let _result = youtube::import_tracks(track_list, &playlist_name).await;
         Ok(())
     } else {
         println!("Going back to Playlist list");
