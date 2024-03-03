@@ -48,8 +48,6 @@ pub async fn search_youtube(query: &str, api_key: &str) -> Result<Vec<Item>, Err
 
 pub async fn import_tracks(track_list: Vec<(String, String)>, playlist_name: &str) -> Result<()> {
     let api_key = std::env::var("YOUTUBE_API_KEY").expect("YOUTUBE_API_KEY must be set.");
-
-    // Create a directory with the playlist name
     let dir_path = Path::new(playlist_name);
     fs::create_dir_all(dir_path)?;
 
@@ -84,18 +82,3 @@ pub async fn import_tracks(track_list: Vec<(String, String)>, playlist_name: &st
     }
     Ok(())
 }
-
-// #[tokio::main]
-// async fn main() {
-//     let api_key = "YOUR_API_KEY_HERE"; // Replace with your actual API key
-//     let query = "Imagine Dragons Believer"; // Example search query
-
-//     match search_youtube(query, api_key).await {
-//         Ok(items) => {
-//             for item in items {
-//                 println!("{}: {}", item.id.videoId, item.snippet.title);
-//             }
-//         }
-//         Err(e) => println!("Error: {}", e),
-//     }
-// }
